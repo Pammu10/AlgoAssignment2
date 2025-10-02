@@ -1,7 +1,3 @@
-Here is the entire content for your README.md file inside a single code block. Just click the "Copy" button in the top-right corner of the block and paste it directly into your README.md file on GitHub or in any text editor.
-
-Markdown
-
 # AlgoAssignment2
 
 This repository contains the source code and scripts for an algorithm assignment. The project involves compiling and running C++ programs to generate data, and then using Python scripts to process this data and generate graphs.
@@ -22,9 +18,14 @@ Follow these steps to set up the project on your local machine.
 
 ### 1. Get the Code
 
+Of course. Here are the instructions you provided, formatted in clean Markdown.
+
+1. Clone the Repository
 Clone the repository from GitHub using the following command:
-```bash
-git clone [https://github.com/Pammu10/AlgoAssignment2.git](https://github.com/Pammu10/AlgoAssignment2.git)
+
+Bash
+
+git clone https://github.com/Pammu10/AlgoAssignment2.git
 2. Navigate to the Directory
 Go into the directory that you just cloned:
 
