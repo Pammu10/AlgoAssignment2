@@ -4,7 +4,6 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 
-# Algorithms
 algorithms = ["bubble", "insertion", "merge", "quickmedian", "heap", "radix"]
 
 input_files = sorted(glob.glob("inputs/*.txt"))
@@ -43,12 +42,10 @@ for algo in algorithms:
         else:
             print(algo, n, inptype, "failed all runs")
 
-# Save CSV
 df = pd.DataFrame(results, columns=["Algorithm", "N", "InputType", "AvgTimeMicroseconds"])
 df.to_csv("all_results_avg.csv", index=False)
 print("Results saved to all_results_avg.csv")
 
-# --- Matplotlib setup ---
 algo_names = {
     "bubble": "Bubble Sort",
     "insertion": "Insertion Sort",
@@ -78,7 +75,6 @@ case_map = {
     "QuickSort (median pivot)": {"best": "Sorted", "worst": "Reversed", "avg": "Random"},
 }
 
-# === Plotting with Matplotlib ===
 def plot_case(case: str, df: pd.DataFrame, outfile: str):
     plt.figure(figsize=(8, 6))
 
