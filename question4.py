@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 df = pd.read_csv("all_results_avg.csv")
 algorithms = ["bubble", "insertion", "merge", "quickmedian", "heap", "radix"]
 
-# --- Matplotlib setup ---
 algo_names = {
     "bubble": "Bubble Sort",
     "insertion": "Insertion Sort",

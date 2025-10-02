@@ -8,7 +8,7 @@ using namespace std;
 
 int partition(vector<int> &arr, int low, int high) {
     int pivot = arr[low];
-    swap(arr[low], arr[high]); // move pivot to end
+    swap(arr[low], arr[high]);
     int left = low - 1;
     for (int right = low; right < high; right++) {
         if (arr[right] <= pivot) {

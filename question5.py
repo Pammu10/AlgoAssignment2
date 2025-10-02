@@ -2,11 +2,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Load CSVs
 all_results = pd.read_csv("all_results_avg.csv")
 quicksort_results = pd.read_csv("quicksort_results_avg.csv")
 
-# Standardize algorithm names
 qs_name_map = {
     "quickfirst": "QuickSort (first pivot)",
     "quickrandom": "QuickSort (random pivot)",
@@ -14,14 +12,11 @@ qs_name_map = {
 }
 quicksort_results["Algorithm"] = quicksort_results["Algorithm"].replace(qs_name_map)
 
-# Standardize input type names
 all_results["InputType"] = all_results["InputType"].str.capitalize()
 quicksort_results["InputType"] = quicksort_results["InputType"].str.capitalize()
 
-# Merge datasets
 df = pd.concat([all_results, quicksort_results], ignore_index=True)
 
-# === Comparison count function ===
 def comparison_counts(algo_name, n):
     if algo_name == "Bubble Sort":
         best = n - 1
@@ -53,10 +48,8 @@ def comparison_counts(algo_name, n):
         best = avg = worst = n
     return best, avg, worst
 
-# Compute average comparisons
 df["AvgComparisons"] = df.apply(lambda row: comparison_counts(row["Algorithm"], row["N"])[1], axis=1)
 
-# Compute time per comparison
 df["TimePerComparison"] = df["AvgTimeMicroseconds"] / df["AvgComparisons"]
 
 # Input types to plot

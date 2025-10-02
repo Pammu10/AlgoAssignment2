@@ -18,7 +18,7 @@ int partition(vector<int> &arr, int low, int high)
     else
         pivotIndex = high;
 
-    swap(arr[pivotIndex], arr[high]); // Move pivot to end
+    swap(arr[pivotIndex], arr[high]);
     int pivot = arr[high];
 
     int left = low - 1;

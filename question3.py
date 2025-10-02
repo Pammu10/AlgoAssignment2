@@ -63,11 +63,7 @@ case_map = {
     "quickmedian": {"best": "Sorted", "worst": "Reversed", "average": "Random"}
 }
 
-# Marker shapes for clarity
-markers = ["o", "s", "^"]
-marker_map = {algo: markers[i % len(markers)] for i, algo in enumerate(algorithms)}
-
-# === Styled plotting function ===
+# === Plotting with Matplotlib ===
 def plot_case(case_type: str, df: pd.DataFrame, outfile: str):
     plt.figure(figsize=(9, 7))
     
@@ -106,3 +102,5 @@ plot_case("worst", df, "quicksort_worst.pdf")
 plot_case("average", df, "quicksort_average.pdf")
 
 print("Plots saved for question 3")
+
+print("plots saved")
