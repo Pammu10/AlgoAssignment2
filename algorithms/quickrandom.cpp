@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
     auto end = chrono::steady_clock::now();
 
     auto duration = chrono::duration_cast<chrono::microseconds>(end - start).count();
-    cout << duration << endl; // output in microseconds
+    cout << duration << endl;
 
     return 0;
 }
