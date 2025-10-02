@@ -63,7 +63,6 @@ case_map = {
     "quickmedian": {"best": "Sorted", "worst": "Reversed", "average": "Random"}
 }
 
-# === Plotting with Matplotlib ===
 def plot_case(case_type: str, df: pd.DataFrame, outfile: str):
     plt.figure(figsize=(8, 6))
     
