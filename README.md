@@ -15,9 +15,10 @@ The setup is tested and works on **Windows 11** only.
 ### Getting Started
 
 1. **Clone the repository**
-
+```
 git clone https://github.com/Pammu10/AlgoAssignment2.git
 cd AlgoAssignment2
+  ```
 
 
 
