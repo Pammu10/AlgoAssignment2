@@ -11,9 +11,9 @@ algo_names = {
     "quickmedian": "QuickSort (median pivot)"
 }
 algo_colors = {
-    "quickfirst": "#1f77b4",
-    "quickrandom": "#ff7f0e",
-    "quickmedian": "#2ca02c"
+    "quickfirst": "#1f77b4",   # blue
+    "quickrandom": "#ff7f0e",  # orange
+    "quickmedian": "#2ca02c"   # green
 }
 
 input_files = sorted(glob.glob("inputs/*.txt"))
@@ -63,9 +63,13 @@ case_map = {
     "quickmedian": {"best": "Sorted", "worst": "Reversed", "average": "Random"}
 }
 
-# === Plotting with Matplotlib ===
+# Marker shapes for clarity
+markers = ["o", "s", "^"]
+marker_map = {algo: markers[i % len(markers)] for i, algo in enumerate(algorithms)}
+
+# === Styled plotting function ===
 def plot_case(case_type: str, df: pd.DataFrame, outfile: str):
-    plt.figure(figsize=(8, 6))
+    plt.figure(figsize=(9, 7))
     
     for algo in algorithms:
         algo_name = algo_names[algo]
@@ -77,27 +81,28 @@ def plot_case(case_type: str, df: pd.DataFrame, outfile: str):
             plt.plot(
                 sub["N"],
                 sub["AvgTimeMicroseconds"],
-                marker="o",
+                marker=marker_map[algo],
+                markersize=6,
                 label=algo_name,
                 color=algo_colors[algo],
-                linewidth=2
+                linewidth=2,
+                alpha=0.9
             )
     
     plt.xscale("log")
     plt.yscale("log")
     plt.xlabel("Input Size (N)", fontsize=14)
-    plt.ylabel("Time (μs)", fontsize=14)
-    plt.title(f"Quicksort Variants - {case_type.capitalize()} Case", fontsize=16)
-    plt.legend(fontsize=12)
-    plt.grid(True, which="both", linestyle="--", linewidth=0.5)
+    plt.ylabel("Execution Time (μs)", fontsize=14)
+    plt.title(f"Quicksort Variants - {case_type.capitalize()} Case", fontsize=16, weight="bold")
+    plt.legend(fontsize=11)
+    plt.grid(True, which="both", linestyle="--", linewidth=0.7, alpha=0.6)
     plt.tight_layout()
     plt.savefig(outfile, format=outfile.split(".")[-1])
     plt.close()
 
-# Generate plots
+# Generate styled plots
 plot_case("best", df, "quicksort_best.pdf")
 plot_case("worst", df, "quicksort_worst.pdf")
 plot_case("average", df, "quicksort_average.pdf")
 
-
-print("plots saved")
+print("Plots saved for question 3")

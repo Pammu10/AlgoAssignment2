@@ -1,52 +1,8 @@
-import subprocess
-import glob
 import pandas as pd
-import os
 import matplotlib.pyplot as plt
 
-# Algorithms
+df = pd.read_csv("all_results_avg.csv")
 algorithms = ["bubble", "insertion", "merge", "quickmedian", "heap", "radix"]
-
-input_files = sorted(glob.glob("inputs/*.txt"))
-results = []
-NUM_RUNS = 5
-
-# Run all algorithms
-for algo in algorithms:
-    exe_path = os.path.join("bin", f"{algo}.exe")
-    for infile in input_files:
-        fname = os.path.basename(infile)
-        if "notsorted" in fname:
-            inptype = "Random"
-        elif "sortedincreasing" in fname:
-            inptype = "Sorted"
-        elif "sorteddecreasing" in fname:
-            inptype = "Reversed"
-        else:
-            inptype = "Unknown"
-
-        n = int(fname.split("_")[-1].split(".")[0])
-        times = []
-
-        for run in range(NUM_RUNS):
-            print(f"Running {algo} on {fname} (run {run+1}/{NUM_RUNS})")
-            try:
-                out = subprocess.check_output([exe_path, infile], text=True).strip()
-                times.append(int(out))
-            except:
-                print("Error running", exe_path, infile)
-
-        if times:
-            avg_time = sum(times) / len(times)
-            results.append([algo, n, inptype, avg_time])
-            print(algo, n, inptype, "average time:", round(avg_time, 2))
-        else:
-            print(algo, n, inptype, "failed all runs")
-
-# Save CSV
-df = pd.DataFrame(results, columns=["Algorithm", "N", "InputType", "AvgTimeMicroseconds"])
-df.to_csv("all_results_avg.csv", index=False)
-print("Results saved to all_results_avg.csv")
 
 # --- Matplotlib setup ---
 algo_names = {
@@ -78,9 +34,11 @@ case_map = {
     "QuickSort (median pivot)": {"best": "Sorted", "worst": "Reversed", "avg": "Random"},
 }
 
-# === Plotting with Matplotlib ===
+markers = ["o", "s", "^", "D", "P", "X"]
+marker_map = {algo: markers[i % len(markers)] for i, algo in enumerate(algorithms)}
+
 def plot_case(case: str, df: pd.DataFrame, outfile: str):
-    plt.figure(figsize=(8, 6))
+    plt.figure(figsize=(9, 7))
 
     for algo in algorithms:
         algo_name = algo_names[algo]
@@ -94,28 +52,29 @@ def plot_case(case: str, df: pd.DataFrame, outfile: str):
             plt.plot(
                 sub["N"],
                 sub["AvgTimeMicroseconds"],
-                marker="o",
+                marker=marker_map[algo],
+                markersize=6,
                 label=algo_name,
                 color=algo_colors[algo],
                 linewidth=2,
-                linestyle=dash_map.get(arr_type_needed, "solid")
+                linestyle=dash_map.get(arr_type_needed, "solid"),
+                alpha=0.9
             )
 
     plt.xscale("log")
     plt.yscale("log")
     plt.xlabel("Input Size (n)", fontsize=14)
-    plt.ylabel("Time (μs)", fontsize=14)
-    plt.title(f"All Algorithms - {case.capitalize()} Case", fontsize=16)
-    plt.legend(fontsize=10)
-    plt.grid(True, which="both", linestyle="--", linewidth=0.5)
+    plt.ylabel("Execution Time (μs)", fontsize=14)
+    plt.title(f"Sorting Algorithms - {case.capitalize()} Case", fontsize=16, weight="bold")
+    plt.legend(fontsize=11, loc="best")
+    plt.grid(True, which="both", linestyle="--", linewidth=0.7, alpha=0.6)
     plt.tight_layout()
     plt.savefig(outfile, format=outfile.split(".")[-1])
     plt.close()
-
 
 # Generate plots
 plot_case("best", df, "all_best.pdf")
 plot_case("worst", df, "all_worst.pdf")
 plot_case("avg", df, "all_avg.pdf")
 
-print("PDF plots saved: all_best.pdf, all_worst.pdf, all_avg.pdf")
+print("Plots saved for question 4")
