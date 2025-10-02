@@ -25,13 +25,11 @@ void generateInput(int n) {
 
     fs::create_directory("inputs");
 
-    // random (unsorted)
     ofstream out("inputs/inputnotsorted_" + to_string(n) + ".txt");
     out << n << "\n";
     for (auto x : arr) out << x << "\n";
     out.close();
 
-    // ascending
     sort(arr.begin(), arr.end());
     out.open("inputs/inputsortedincreasing_" + to_string(n) + ".txt");
     out << n << "\n";
@@ -44,7 +42,6 @@ void generateInput(int n) {
     for (auto x : balanced) out << x << "\n";
     out.close();
 
-    // descending
     sort(arr.begin(), arr.end(), greater<int>());
     out.open("inputs/inputsorteddecreasing_" + to_string(n) + ".txt");
     out << n << "\n";
