@@ -1,10 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Load data
 df = pd.read_csv("all_results_avg.csv")
 
-# Mapping algorithm codes to pretty names
 algo_names = {
     "bubble": "Bubble Sort",
     "insertion": "Insertion Sort",

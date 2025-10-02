@@ -2,14 +2,13 @@ import subprocess
 import glob
 import os
 import pandas as pd
-# Algorithms
+
 algorithms = ["bubble", "insertion", "merge", "quickmedian", "heap", "radix"]
 
 input_files = sorted(glob.glob("inputs/*.txt"))
 results = []
 NUM_RUNS = 5
 
-# Run all algorithms
 for algo in algorithms:
     exe_path = os.path.join("bin", f"{algo}.exe")
     for infile in input_files:
@@ -43,7 +42,6 @@ for algo in algorithms:
         else:
             print(algo, n, inptype, "failed all runs")
 
-# Save CSV
 df = pd.DataFrame(results, columns=["Algorithm", "N", "InputType", "AvgTimeMicroseconds"])
 df.to_csv("all_results_avg.csv", index=False)
 print("Results saved to all_results_avg.csv")
