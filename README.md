@@ -50,6 +50,11 @@ This will create input files inside the **input** folder.
 
 ---
 
+
+### Running all the algorithms
+
+uv run run_all.py
+
 ### Running the Assignment Scripts
 
 - **Question 3**
