@@ -11,9 +11,9 @@ algo_names = {
     "quickmedian": "QuickSort (median pivot)"
 }
 algo_colors = {
-    "quickfirst": "#1f77b4",   # blue
-    "quickrandom": "#ff7f0e",  # orange
-    "quickmedian": "#2ca02c"   # green
+    "quickfirst": "#1f77b4", 
+    "quickrandom": "#ff7f0e", 
+    "quickmedian": "#2ca02c"  
 }
 
 input_files = sorted(glob.glob("inputs/*.txt"))
@@ -98,7 +98,6 @@ def plot_case(case_type: str, df: pd.DataFrame, outfile: str):
     plt.savefig(outfile, format=outfile.split(".")[-1])
     plt.close()
 
-# Generate styled plots
 plot_case("best", df, "quicksort_best.pdf")
 plot_case("worst", df, "quicksort_worst.pdf")
 plot_case("average", df, "quicksort_average.pdf")

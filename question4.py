@@ -71,7 +71,7 @@ def plot_case(case: str, df: pd.DataFrame, outfile: str):
     plt.savefig(outfile, format=outfile.split(".")[-1])
     plt.close()
 
-# Generate plots
+
 plot_case("best", df, "all_best.pdf")
 plot_case("worst", df, "all_worst.pdf")
 plot_case("avg", df, "all_avg.pdf")

@@ -52,7 +52,6 @@ df["AvgComparisons"] = df.apply(lambda row: comparison_counts(row["Algorithm"], 
 
 df["TimePerComparison"] = df["AvgTimeMicroseconds"] / df["AvgComparisons"]
 
-# Input types to plot
 input_types = ["Random", "Sorted", "Reversed"]
 
 for inptype in input_types:
